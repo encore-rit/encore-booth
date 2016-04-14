@@ -23,7 +23,8 @@ function handleVideo(stream) {
 function snapPhoto() {
   // ctx.drawImage(video,0,0,700,500);
   console.log(capture);
-  return capture('./data/test-take.jpg');
+  return capture('./data/test-take.jpg')
+  .then(x => console.log(x), e => console.error(e));
 }
 
 function sentPhoto() {

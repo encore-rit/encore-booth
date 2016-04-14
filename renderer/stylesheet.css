@@ -80,7 +80,20 @@ h1, h2, h3 {
   font-family: 'edo_regular';
 }
 
-.screen-1 {
+#screen-1 {
+  display: none;
+}
+
+#screen-2 {
+  display: none;
+}
+
+#screen-3 {
+  display: block;
+}
+
+#screen-4 {
+  display: none;
 }
 
 .header {
