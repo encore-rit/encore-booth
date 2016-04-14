@@ -17,5 +17,6 @@ module.exports = function capture(path) {
   const CAPTURE_COMMAND =
     `pkill PTP ; gphoto2 --capture-image-and-download --filename ${path}`;
 
+  console.log(`Capture photo and write to ${path}`);
   return promiseFromChildProcess(exec(CAPTURE_COMMAND));
 };
