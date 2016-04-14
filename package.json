@@ -1,0 +1,28 @@
+{
+  "name": "encore-booth",
+  "version": "1.0.0",
+  "description": "A photo booth application for encore",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/encore-rit/encore-booth.git"
+  },
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial"
+  ],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/encore-rit/encore-booth/issues"
+  },
+  "homepage": "https://github.com/encore-rit/encore-booth/",
+  "dependencies": {
+    "electron-prebuilt": "^0.37.5"
+  }
+}
