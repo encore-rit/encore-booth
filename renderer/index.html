@@ -7,36 +7,62 @@
 </head>
 
 <body>
-  <div id="screen-1">
-  </div>
 
-  <div id="screen-2">
-    <header class="screen-2-header header">
-      <h1>LET'S DO THIS</h1>
-      <p>
-        You're about to take 3<br />
-        consecutive photos mimicking<br />
-        David Bowie
-      </p>
+  <div id="screen-exit" class="screen">
+    <header class="screen-exit-header header">
+      <h1>ROCK ON!!</h1>
     </header>
+
+    <img src="images/david-bowie-pose.jpg" class="pose-res pose-res-1" />
+    <img src="images/david-bowie-pose.jpg" class="pose-res pose-res-2" />
+    <img src="images/david-bowie-pose.jpg" class="pose-res pose-res-3" />
+
+    <h4 class="pose-exit">Exit to the lounge to edit your</br>
+        photo and add your memory</h4>
   </div>
 
-  <div id="screen-3">
-    <header class="screen-3-header header">
+  <div id="screen-take-picture" class="screen">
+    <header class="screen-take-picture-header header">
       <h1>STAND BACK</h1>
       <p>
         You've got three chances to get it right!
       </p>
     </header>
 
+    <h1 id="countdown" class="countdown"></h1>
+
     <video autoplay="true" id="webcamVideo" class="webcamVideo"></video>
+    <img src="./images/elvis/elvis-cutout.png" class="pose-img-overlay" />
   </div>
 
-  <div id="screen-4">
+  <div id="screen-bw" class="screen">
+    <header class="screen-bw-header header">
+      <h1>STAND BACK</h1>
+      <p>You have 3 chances to get it right!</p>
+
+      <img src="./images/elvis/elvis-bw-color.png" class="pose-img" />
+    </header>
   </div>
 
+  <div id="screen-color" class="screen">
+    <header class="screen-color-header header">
+      <h1>LET'S DO THIS</h1>
+      <p>
+        You're about to take 3<br />
+        consecutive photos mimicking<br />
+        David Bowie
+      </p>
 
-  <h1 id="countdown" class="countdown"></h1>
+      <img src="./images/elvis/elvis-color.jpg" class="pose-img" />
+    </header>
+  </div>
+
+  <div id="screen-intro" class="screen">
+    <header class="screen-intro-header header">
+      <h2>ARE YOU READY</h2>
+      <h1>TO ROCK?</h1>
+    </header>
+  </div>
 
   <script src="./renderer.js" type="text/javascript"></script>
 </body>

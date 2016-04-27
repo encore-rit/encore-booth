@@ -1,8 +1,18 @@
+const when = require('when');
+const sequence = require('when/sequence');
+const classname = require('classname');
+
 const { remote } = require('electron');
 const capture = remote.require('./main/capture');
 
 const video = document.querySelector("#webcamVideo");
 const countdownView = document.getElementById('countdown');
+
+const screenIntro = document.querySelector('#screen-intro')
+const screenColor = document.querySelector('#screen-color');
+const screenBW = document.querySelector('#screen-bw');
+const screenTakePicture = document.querySelector('#screen-take-picture');
+const screenExit = document.querySelector('#screen-exit');
 
 document.onkeypress = countdownCB;
 
@@ -15,6 +25,35 @@ navigator.getUserMedia = navigator.getUserMedia ||
 if (navigator.getUserMedia) {
   navigator.getUserMedia({video: true}, handleVideo, console.error);
 }
+
+function display([prev, next]) {
+  prev.className = classname(prev, {show: false});
+  next.className = classname(next, {show: true});
+}
+
+/**
+ * Given an HTML DOM node, give it the .hide CSS class
+ */
+function hide(node) {
+  node.className = classname(node, {hide: true});
+}
+
+/**
+ * Wait ms milliseconds before calling the hide function on given node
+ */
+function showFor(node, ms) {
+  return when(node).delay(ms).then(hide)
+}
+
+function interactionLoop() {
+  return      showFor(screenIntro, 3000)
+  .then(() => showFor(screenColor, 3000))
+  .then(() => showFor(screenBW, 3000))
+  .then(() => showFor(screenTakePicture, 7000))
+  ;
+}
+
+interactionLoop();
 
 function handleVideo(stream) {
   video.src = window.URL.createObjectURL(stream);

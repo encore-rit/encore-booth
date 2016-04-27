@@ -6,7 +6,7 @@
        url('./fonts/proximanova-bold-webfont.woff') format('woff'),
        url('./fonts/proximanova-bold-webfont.ttf') format('truetype'),
        url('./fonts/proximanova-bold-webfont.svg#proxima_nova_rgbold') format('svg');
-  font-weight: normal;
+  font-weight: bold;
   font-style: normal;
 }
 
@@ -18,7 +18,7 @@
        url('./fonts/proximanova-boldit-webfont.woff') format('woff'),
        url('./fonts/proximanova-boldit-webfont.ttf') format('truetype'),
        url('./fonts/proximanova-boldit-webfont.svg#proxima_nova_rgbold_italic') format('svg');
-  font-weight: normal;
+  font-weight: bold;
   font-style: italic;
 }
 
@@ -73,27 +73,97 @@ body {
 
   font-family: 'proxima_nova_regular';
   font-size: 24px;
-  background: url('./images/concert-back-1.png') center center / cover no-repeat no-repeat;
 }
 
 h1, h2, h3 {
   font-family: 'edo_regular';
 }
 
-#screen-1 {
-  display: none;
+h1 {
+  font-size: 50px;
 }
 
-#screen-2 {
-  display: none;
+.screen {
+  transition: opacity 2s ease-in-out;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  background: url('./images/concert-back-1.png') center center / cover no-repeat no-repeat;
 }
 
-#screen-3 {
-  display: block;
+.hide {
+  /* display: none; */
+  opacity: 0;
 }
 
-#screen-4 {
-  display: none;
+.show {
+  /* display: block; */
+  opacity: 1;
+}
+
+.screen-intro-header {
+  padding-top: 596px !important;
+}
+
+.screen-intro-header h1 {
+  font-size: 113px;
+  margin: 2px;
+}
+
+.screen-intro-header h2 {
+  font-size: 74px;
+  margin: 2px;
+}
+
+.pose-img {
+  transition: opacity 2s ease-in-out;
+  position: absolute;
+  width: 550px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.pose-img-overlay {
+  opacity: 0.75;
+  position: absolute;
+  width: 550px;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+}
+
+.screen-exit-header h1 {
+  font-size: 94px;
+ }
+
+.pose-exit {
+  margin-top: 750px;
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  font-family: 'proxima_nova_bold';
+  color: white;
+}
+
+.pose-res {
+  width: 210px;
+  margin-top: 30px;
+  margin-right: 10px;
+  float: left;
+}
+
+.pose-res-1 {
+  margin-left: 35px;
+}
+
+.pose-res-2 {
+  margin-top: 100px !important;
+}
+
+.pose-res-3 {
+  margin-top: 200px !important;
 }
 
 .header {
@@ -106,17 +176,12 @@ h1, h2, h3 {
 .webcamVideo {
   width: 740px;
   height: 550px;
-  margin: 0 82px;
-  transform: rotate(-90deg) translateX(-740px);
-  transform-origin: top left; 
+  /* margin: 0 82px; */
+  position: absolute;
+  margin: 0 auto;
+  transform: rotate(-90deg) translateX(-780px) translateY(85px);
+  transform-origin: top left;
   object-fit: cover;
-
-  /* width: 100vw; */
-  /* height: 100vh; */
-  /* position: fixed;  */
-  /* left: 0px; */
-  /* top: 0px; */
-  /* z-index: -1; */
 }
 
 .countdown {

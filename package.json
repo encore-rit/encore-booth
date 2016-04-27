@@ -28,7 +28,10 @@
     "babel-preset-stage-0": "^6.5.0",
     "babel-template": "^6.7.0",
     "babel-types": "^6.7.2",
+    "bluebird": "^3.3.5",
+    "classname": "0.0.0",
     "electron-prebuilt": "^0.37.5",
-    "ramda": "^0.21.0"
+    "ramda": "^0.21.0",
+    "when": "^3.7.7"
   }
 }
