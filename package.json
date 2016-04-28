@@ -31,6 +31,7 @@
     "bluebird": "^3.3.5",
     "classname": "0.0.0",
     "electron-prebuilt": "^0.37.5",
+    "lodash": "^4.11.1",
     "ramda": "^0.21.0",
     "when": "^3.7.7"
   }
