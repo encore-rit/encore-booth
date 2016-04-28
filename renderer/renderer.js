@@ -17,7 +17,11 @@ const screenExit = document.querySelector('#screen-exit');
 const screens = [ screenIntro, screenColor, screenBW,
   screenTakePicture, screenExit ];
 
-document.onkeypress = interactionLoop;
+document.onkeypress = start;
+
+function start() {
+  interactionLoop({userId: 'blah-blah-blah', artist: 'elvis'})
+}
 
 navigator.getUserMedia = navigator.getUserMedia ||
   navigator.webkitGetUserMedia ||
@@ -52,20 +56,23 @@ function showFor(node, ms) {
   return when(node).delay(ms).then(hide)
 }
 
-function interactionLoop() {
+function interactionLoop({userId, artist}) {
   document.onkeypress = undefined;
   hide(screenIntro);
 
   return      showFor(screenColor, 3000)
   .then(() => showFor(screenBW, 3000))
-  .then(() => timer(5).delay(1000))
-  .then(() => timer(5).delay(1000))
-  .then(() => timer(5).delay(1000))
+  // .then(() => timer(5).then(() => capturePhoto(`${userId}-${artist}-1`))
+  // .then(() => timer(5).then(() => capturePhoto(`${userId}-${artist}-2`))
+  // .then(() => timer(5).then(() => capturePhoto(`${userId}-${artist}-3`))
+  .then(() => timer(5).delay(3000))
+  .then(() => timer(5).delay(3000))
+  .then(() => timer(5).delay(3000))
   .then(() => showFor(screenTakePicture, 1000))
   .delay(8000)
   .then(() => {
     forEach(show, screens);
-    document.onkeypress = interactionLoop;
+    document.onkeypress = start;
   })
   ;
 }
@@ -74,10 +81,8 @@ function handleVideo(stream) {
   video.src = window.URL.createObjectURL(stream);
 }
 
-function snapPhoto() {
-  // ctx.drawImage(video,0,0,700,500);
-  console.log(capture);
-  return capture('./data/test-take.jpg')
+function capturePhoto(filename) {
+  return capture(`./data/${filename}.jpg`)
   .then(x => console.log(x), e => console.error(e));
 }
 

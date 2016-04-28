@@ -104,6 +104,8 @@ h1 {
 
 .screen-intro-header {
   padding-top: 596px !important;
+  position: relative;
+  z-index: 1;
 }
 
 .screen-intro-header h1 {
@@ -175,6 +177,12 @@ h1 {
   text-align: center;
   min-height: 284px;
   padding: 47px 0;
+}
+
+.music-video {
+  position: absolute;
+  top: 0;
+  height: 100%;
 }
 
 .webcamVideo {
