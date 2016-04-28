@@ -84,7 +84,7 @@ h1 {
 }
 
 .screen {
-  transition: opacity 2s ease-in-out;
+  transition: opacity 1s;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -120,13 +120,13 @@ h1 {
   transition: opacity 2s ease-in-out;
   position: absolute;
   width: 550px;
-  top: 50%;
+  top: 60%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -60%);
 }
 
 .pose-img-overlay {
-  opacity: 0.75;
+  opacity: 0.4;
   position: absolute;
   width: 550px;
   top: 60%;
@@ -134,9 +134,13 @@ h1 {
   transform: translate(-50%, -60%);
 }
 
+#screen-exit {
+  background: url('./images/concert-back-2.png') center center / cover no-repeat no-repeat;
+}
+
 .screen-exit-header h1 {
   font-size: 94px;
- }
+}
 
 .pose-exit {
   margin-top: 750px;

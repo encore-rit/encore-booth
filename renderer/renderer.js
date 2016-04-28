@@ -1,6 +1,7 @@
 const when = require('when');
 const sequence = require('when/sequence');
 const classname = require('classname');
+const { equals, dec, compose, forEach } = require('ramda');
 
 const { remote } = require('electron');
 const capture = remote.require('./main/capture');
@@ -13,8 +14,10 @@ const screenColor = document.querySelector('#screen-color');
 const screenBW = document.querySelector('#screen-bw');
 const screenTakePicture = document.querySelector('#screen-take-picture');
 const screenExit = document.querySelector('#screen-exit');
+const screens = [ screenIntro, screenColor, screenBW,
+  screenTakePicture, screenExit ];
 
-document.onkeypress = countdownCB;
+document.onkeypress = interactionLoop;
 
 navigator.getUserMedia = navigator.getUserMedia ||
   navigator.webkitGetUserMedia ||
@@ -38,6 +41,10 @@ function hide(node) {
   node.className = classname(node, {hide: true});
 }
 
+function show(node) {
+  node.className = classname(node, {hide: false});
+}
+
 /**
  * Wait ms milliseconds before calling the hide function on given node
  */
@@ -46,14 +53,22 @@ function showFor(node, ms) {
 }
 
 function interactionLoop() {
-  return      showFor(screenIntro, 3000)
-  .then(() => showFor(screenColor, 3000))
+  document.onkeypress = undefined;
+  hide(screenIntro);
+
+  return      showFor(screenColor, 3000)
   .then(() => showFor(screenBW, 3000))
-  .then(() => showFor(screenTakePicture, 7000))
+  .then(() => timer(5).delay(1000))
+  .then(() => timer(5).delay(1000))
+  .then(() => timer(5).delay(1000))
+  .then(() => showFor(screenTakePicture, 1000))
+  .delay(8000)
+  .then(() => {
+    forEach(show, screens);
+    document.onkeypress = interactionLoop;
+  })
   ;
 }
-
-interactionLoop();
 
 function handleVideo(stream) {
   video.src = window.URL.createObjectURL(stream);
@@ -72,35 +87,15 @@ function sentPhoto() {
   console.log("function sentPhoto called");
   const pic = document.getElementById("snapCanvas").toDataURL();
   const windowName = "webcamPhoto";
-  // Sending the image data to Server
-  // $.ajax({
-  //   type: 'POST',
-  //   url: '/user/1254/photos',
-  //   data: '{ "PictureData" : "' + pic + '" }',
-  //   contentType: 'application/json; charset=utf-8',
-  //   dataType: 'json',
-  //   success: function (msg) {
-  //     alert("Done, Picture Uploaded.");
-  //   }
-  // });
 }
 
-function countdownCB() {
-  countdown(3);
+function timer(seconds) {
+  if (equals(seconds, 0)) {
+    countdownView.innerHTML = '';
+    return when.resolve(seconds)  
+  }
+
+  countdownView.innerHTML = seconds;
+  console.log(seconds)
+  return when(seconds).delay(1000).then(compose(timer, dec))
 }
-
-//countdown and snap a photo from webcam once the countdown is finish
-function countdown(length) {
-  let second = 0,
-  interval = setInterval(function() {
-    console.log(countdownView);
-    countdownView.innerHTML = (length - second);
-
-    if (second >= length) {
-      snapPhoto();
-      clearInterval(interval);
-    }
-    second++;
-  }, 1000);
-}
-
