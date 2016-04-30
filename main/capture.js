@@ -1,3 +1,5 @@
+const { exec } = require('child-process-promise');
+
 /**
  * @param {String} path path to where to store photo
  * @returns {Promise<Int>} resolves to 0 or rejects

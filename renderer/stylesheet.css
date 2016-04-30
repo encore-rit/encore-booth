@@ -65,6 +65,7 @@ html, body {
   height: 1283px;
   width: 720px;
   overflow: hidden;
+  background: url('./images/concert-back-1.png') center center / cover no-repeat no-repeat;
 }
 
 body {
