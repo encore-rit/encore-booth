@@ -29,10 +29,12 @@
     "babel-template": "^6.7.0",
     "babel-types": "^6.7.2",
     "bluebird": "^3.3.5",
+    "child-process-promise": "^2.0.1",
     "classname": "0.0.0",
     "electron-prebuilt": "^0.37.5",
     "lodash": "^4.11.1",
     "ramda": "^0.21.0",
+    "socket.io-client": "^1.4.5",
     "when": "^3.7.7"
   }
 }

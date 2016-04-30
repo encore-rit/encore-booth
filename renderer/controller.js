@@ -33,8 +33,7 @@ function showFor(node, ms) {
 }
 
 function capturePhoto(filename) {
-  return capture(`./data/${filename}.jpg`)
-  .then(x => console.log(x), e => console.error(e));
+  return capture(`./data/${filename}.jpg`);
 }
 
 function sentPhoto() {
@@ -71,12 +70,18 @@ function interactionLoop({ user, screens, countdownViewEl }) {
 
   return      showFor(screenColorEl, 3000)
   .then(() => showFor(screenBWEl, 3000))
-  // .then(() => timer(5).then(() => capturePhoto(`${userId}-${artist}-1`))
-  // .then(() => timer(5).then(() => capturePhoto(`${userId}-${artist}-2`))
-  // .then(() => timer(5).then(() => capturePhoto(`${userId}-${artist}-3`))
+
   .then(() => startTimer(countdownViewEl, 5).delay(3000))
+  .then(() => capturePhoto(`${user.userId}-${user.artistKey}-1`))
   .then(() => startTimer(countdownViewEl, 5).delay(3000))
+  .then(() => capturePhoto(`${user.userId}-${user.artistKey}-2`))
   .then(() => startTimer(countdownViewEl, 5).delay(3000))
+  .then(() => capturePhoto(`${user.userId}-${user.artistKey}-3`))
+
+  // .then(() => startTimer(countdownViewEl, 5).delay(3000))
+  // .then(() => startTimer(countdownViewEl, 5).delay(3000))
+  // .then(() => startTimer(countdownViewEl, 5).delay(3000))
+
   .then(() => showFor(screenTakePictureEl, 1000))
   .delay(8000)
   .then(() => {

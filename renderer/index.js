@@ -1,6 +1,7 @@
 const { injectTemplate } = require('./renderer');
 const { streamWebcamTo, interactionLoop } = require('./controller');
 const template = require('lodash/template');
+const socket = require('socket.io-client')('http://localhost:1339');
 
 const screenTemplate = template(require('./template'));
 const rootTmplEl = document.querySelector('#screen-template');
@@ -21,8 +22,6 @@ const testUser = {
   artist: 'Elvis',
 };
  
-let currentInteraction = null;
-
 function start(user) {
   const { videoEl, countdownViewEl,
     screenIntroEl, screenColorEl,
@@ -34,14 +33,28 @@ function start(user) {
 
   streamWebcamTo(videoEl);
 
-  document.addEventListener('keydown', (e) => {
-    let currentInteraction =
-      interactionLoop({ user, screens, countdownViewEl });
-  });
-
-  return currentInteraction;
+  return new Promise((resolve, reject) => {
+    document.addEventListener('keydown', (e) => {
+      interactionLoop({ user, screens, countdownViewEl })
+        .then(resolve, reject);
+    });
+  })
 }
 
-start(testUser);
+socket.on('connect', () => {
+  console.log('connected to server');
+});
+
+socket.emit('CONSUME_TAKER');
+
+socket.on('CONSUME_TAKER_JOB', (job) => {
+  console.log(job.data.payload);
+
+  start(job.data.payload).then((res) => {
+    socket.emit('CONSUMED_TAKER');
+  });
+})
+
+// start(testUser);
 
 
