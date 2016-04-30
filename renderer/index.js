@@ -48,10 +48,11 @@ socket.on('connect', () => {
 socket.emit('CONSUME_TAKER');
 
 socket.on('CONSUME_TAKER_JOB', (job) => {
-  console.log(job.data.payload);
+  console.log('New taker job', job.data.payload);
 
   start(job.data.payload).then((res) => {
     socket.emit('CONSUMED_TAKER');
+    socket.emit('CONSUME_TAKER');
   });
 })
 

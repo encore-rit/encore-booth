@@ -60,34 +60,43 @@ function startTimer(countdownView, duration) {
   return timer(duration);
 }
 
+function reloadImgs(arrayOfQueries) {
+  arrayOfQueries.forEach((query) => {
+    const el = document.querySelector(query)
+    const currentSrc = el.getAttribute('src');
+    console.log(el, currentSrc);
+    el.setAttribute('src', `${currentSrc}?v=1`);
+  });
+  return Promise.resolve(true);
+}
+
 function interactionLoop({ user, screens, countdownViewEl }) {
   const { screenIntroEl, screenColorEl, screenBWEl,
     screenTakePictureEl, screenExitEl } = screens;
 
-  console.log(user, screens)
+  console.log(user)
   document.onkeypress = undefined;
   hide(screenIntroEl);
 
   return      showFor(screenColorEl, 3000)
   .then(() => showFor(screenBWEl, 3000))
 
-  .then(() => startTimer(countdownViewEl, 5).delay(3000))
+  .then(() => startTimer(countdownViewEl, 5))
   .then(() => capturePhoto(`${user.userId}-${user.artistKey}-1`))
-  .then(() => startTimer(countdownViewEl, 5).delay(3000))
+  .then(() => startTimer(countdownViewEl, 5))
   .then(() => capturePhoto(`${user.userId}-${user.artistKey}-2`))
-  .then(() => startTimer(countdownViewEl, 5).delay(3000))
+  .then(() => startTimer(countdownViewEl, 5))
   .then(() => capturePhoto(`${user.userId}-${user.artistKey}-3`))
 
-  // .then(() => startTimer(countdownViewEl, 5).delay(3000))
-  // .then(() => startTimer(countdownViewEl, 5).delay(3000))
-  // .then(() => startTimer(countdownViewEl, 5).delay(3000))
+  .then(() => reloadImgs(['.pose-res-1', '.pose-res-2', '.pose-res-3']))
 
   .then(() => showFor(screenTakePictureEl, 1000))
-  .delay(8000)
-  .then(() => {
-    forEach(show, values(screens));
-  })
-  ;
+  .delay(10000)
+  .then(() => forEach(show, values(screens)));
+
+  // .then(() => startTimer(countdownViewEl, 5).delay(3000))
+  // .then(() => startTimer(countdownViewEl, 5).delay(3000))
+  // .then(() => startTimer(countdownViewEl, 5).delay(3000))
 }
 
 module.exports = {

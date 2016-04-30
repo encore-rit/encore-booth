@@ -3,11 +3,11 @@ module.exports = `
     <header class="screen-exit-header header">
       <h1>ROCK ON!!</h1>
 
-      <img src="images/<%= artistKey %>/color.jpg"
+      <img src="../data/<%= userId %>-<%= artistKey %>-1.jpg"
            class="pose-res pose-res-1" />
-      <img src="images/<%= artistKey %>/color.jpg"
+      <img src="../data/<%= userId %>-<%= artistKey %>-2.jpg"
            class="pose-res pose-res-2" />
-      <img src="images/<%= artistKey %>/color.jpg"
+      <img src="../data/<%= userId %>-<%= artistKey %>-3.jpg"
            class="pose-res pose-res-3" />
     </header>
 
