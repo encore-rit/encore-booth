@@ -31,13 +31,15 @@ function start(user) {
   const screens = { screenIntroEl, screenColorEl, screenBWEl,
     screenTakePictureEl, screenExitEl };
 
+  console.log('start() called with', user)
+
   streamWebcamTo(videoEl);
 
   return new Promise((resolve, reject) => {
-    document.addEventListener('keydown', (e) => {
+    document.onkeypress = (e) => {
       interactionLoop({ user, screens, countdownViewEl })
         .then(resolve, reject);
-    });
+    };
   })
 }
 

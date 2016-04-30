@@ -39,7 +39,6 @@ function capturePhoto(filename) {
 function sentPhoto() {
   // open a new window and load the image in it
   // http://www.w3schools.com/jsref/met_win_open.asp
-  console.log("function sentPhoto called");
   const pic = document.getElementById("snapCanvas").toDataURL();
   const windowName = "webcamPhoto";
 }
@@ -53,7 +52,6 @@ function startTimer(countdownView, duration) {
     }
 
     countdownView.innerHTML = seconds;
-    console.log(seconds)
     return when(seconds).delay(1000).then(compose(timer, dec));
   }
 
@@ -64,7 +62,6 @@ function reloadImgs(arrayOfQueries) {
   arrayOfQueries.forEach((query) => {
     const el = document.querySelector(query)
     const currentSrc = el.getAttribute('src');
-    console.log(el, currentSrc);
     el.setAttribute('src', `${currentSrc}?v=1`);
   });
   return Promise.resolve(true);
@@ -74,7 +71,6 @@ function interactionLoop({ user, screens, countdownViewEl }) {
   const { screenIntroEl, screenColorEl, screenBWEl,
     screenTakePictureEl, screenExitEl } = screens;
 
-  console.log(user)
   document.onkeypress = undefined;
   hide(screenIntroEl);
 
