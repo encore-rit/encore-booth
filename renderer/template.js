@@ -45,7 +45,7 @@ module.exports = `
         <%= artist %>
       </p>
 
-      <img src="images/<%= artistKey %>/color.jpg" class="pose-img" />
+      <img src="images/<%= artistKey %>/color.png" class="pose-img" />
     </header>
   </div>
 
