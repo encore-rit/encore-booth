@@ -1,8 +1,8 @@
 const imgur = require('imgur');
 
-imgur.secClientId('665e91941704f23');
+imgur.setClientId('665e91941704f23');
 
-module.exports = function(path) {
-  return imgur.uploadFile(`./data/${path}`)
+module.exports = function(filepath) {
+  return imgur.uploadFile(filepath)
   .then((json) => json.data.link)
 }

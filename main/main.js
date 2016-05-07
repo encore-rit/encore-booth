@@ -2,6 +2,7 @@
 
 const electron = require('electron');
 const path = require('path');
+const five = require("johnny-five");
 
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
@@ -9,6 +10,8 @@ const BrowserWindow = electron.BrowserWindow;
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+let button;
+let led;
 
 function createWindow () {
   // Create the browser window.
@@ -19,6 +22,32 @@ function createWindow () {
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
+
+  mainWindow.webContents.on('did-finish-load', () => {
+
+    five.Board({ repl: false }).on("ready", function() {
+
+      button = new five.Button({
+        pin: 2,
+        isPullup: true
+      });
+
+      led = new five.Led(13);
+
+      button.on("press", function(value) {
+        console.log('pressed')
+        mainWindow.webContents.send('buttonClick');
+      });
+
+      button.on("down", function(value) {
+        led.on();
+      });
+
+      button.on("up", function() {
+        led.off();
+      });
+    });
+  });
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {

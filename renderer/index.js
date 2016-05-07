@@ -1,10 +1,16 @@
+const API = 'http://localhost:1339';
+
 const { injectTemplate } = require('./renderer');
 const { streamWebcamTo, interactionLoop } = require('./controller');
 const template = require('lodash/template');
 const socket = require('socket.io-client')('http://localhost:1339');
+const { merge } = require('ramda');
+const ipcRenderer = require('electron').ipcRenderer;
+require('whatwg-fetch');
 
 const screenTemplate = template(require('./template'));
 const rootTmplEl = document.querySelector('#screen-template');
+
 
 /**
  * Insert socket.io logic
@@ -16,13 +22,7 @@ const rootTmplEl = document.querySelector('#screen-template');
  *   
  */ 
 
-const testUser = {
-  userId: 'blah-blah-blah',
-  artistKey: 'elvis',
-  artist: 'Elvis',
-};
- 
-function start(user) {
+function start(user, cb) {
   const { videoEl, countdownViewEl,
     screenIntroEl, screenColorEl,
     screenBWEl, screenTakePictureEl,
@@ -35,29 +35,48 @@ function start(user) {
 
   streamWebcamTo(videoEl);
 
-  return new Promise((resolve, reject) => {
-    document.onkeypress = (e) => {
-      interactionLoop({ user, screens, countdownViewEl })
-        .then(resolve, reject);
-    };
-  })
+  ipcRenderer.on('buttonClick', (e) => {
+    ipcRenderer.removeAllListeners('buttonClick');
+    interactionLoop({ user, screens, countdownViewEl })
+      .then(cb);
+  });
+
+  // document.onkeypress = (e) => {
+  //   document.onkeypress = undefined;
+  //   interactionLoop({ user, screens, countdownViewEl })
+  //     .then(cb);
+  // };
 }
 
+console.log(ipcRenderer)
+
 socket.on('connect', () => {
-  console.log('connected to server');
+  console.log('Connected to server');
 });
 
-socket.emit('CONSUME_TAKER');
+socket.emit('TAKE_TAKER');
 
-socket.on('CONSUME_TAKER_JOB', (job) => {
-  console.log('New taker job', job.data.payload);
+socket.on('SEND_TAKER', (taker) => {
+  console.log('received SEND_TAKER', taker)
+  socket.emit('TOOK_TAKER', taker);
 
-  start(job.data.payload).then((res) => {
-    socket.emit('CONSUMED_TAKER');
-    socket.emit('CONSUME_TAKER');
+  start(taker, (res) => {
+    console.log('sending READY_TAKER', taker, res);
+    console.log(merge(taker, { photos: res }));
+
+    fetch(`${API}/users/${taker._id}/ready`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        photos: taker.photos,
+      })
+    })
+    .then(() => {
+      console.log('finished posting')
+      socket.emit('TAKE_TAKER') 
+    });
   });
-})
-
-// start(testUser);
-
-
+});

@@ -164,21 +164,23 @@ h1 {
 }
 
 .pose-res {
-  width: 360px;
-  margin-left: 50px;
+  width: 470px;
+  margin-left: -65px;
   float: left;
+  transform: rotate(90deg);
 }
 
 .pose-res-1 {
   margin-top: 200px;
+  margin-left: -5px;
 }
 
 .pose-res-2 {
-  margin-top: 300px;
+  margin-top: 350px;
 }
 
 .pose-res-3 {
-  margin-top: 400px;
+  margin-top: 500px;
 }
 
 .header {

@@ -1,3 +1,8 @@
+/**
+ * view is an object with strings for:
+ * _id, artistKey, artist
+ *
+ */
 function injectTemplate(rootEl, template, view) {
   rootEl.innerHTML = template(view);
 

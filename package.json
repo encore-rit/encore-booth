@@ -32,9 +32,12 @@
     "child-process-promise": "^2.0.1",
     "classname": "0.0.0",
     "electron-prebuilt": "^0.37.5",
+    "johnny-five": "^0.9.46",
     "lodash": "^4.11.1",
+    "mz": "^2.4.0",
     "ramda": "^0.21.0",
     "socket.io-client": "^1.4.5",
+    "whatwg-fetch": "^1.0.0",
     "when": "^3.7.7"
   },
   "devDependencies": {
