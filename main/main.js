@@ -24,9 +24,7 @@ function createWindow () {
   mainWindow.webContents.openDevTools();
 
   mainWindow.webContents.on('did-finish-load', () => {
-
     five.Board({ repl: false }).on("ready", function() {
-
       button = new five.Button({
         pin: 2,
         isPullup: true

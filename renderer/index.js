@@ -1,9 +1,10 @@
-const API = 'http://localhost:1339';
+// const API = 'http://localhost:1339';
+const API = 'http://encore-api.herokuapp.com';
 
 const { injectTemplate } = require('./renderer');
 const { streamWebcamTo, interactionLoop } = require('./controller');
 const template = require('lodash/template');
-const socket = require('socket.io-client')('http://localhost:1339');
+const socket = require('socket.io-client')(API);
 const { merge } = require('ramda');
 const ipcRenderer = require('electron').ipcRenderer;
 require('whatwg-fetch');
@@ -71,7 +72,7 @@ socket.on('SEND_TAKER', (taker) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        photos: taker.photos,
+        photos: res,
       })
     })
     .then(() => {

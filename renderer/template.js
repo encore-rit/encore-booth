@@ -51,12 +51,14 @@ module.exports = `
 
   <div id="screen-intro" class="screen">
 
-    <video autoplay loop muted src="images/<%= artistKey %>/video.mp4"
+    <video autoplay loop src="images/<%= artistKey %>/video.mp4"
       id="music-video" class="music-video"></video>
 
     <header class="screen-intro-header header">
       <h2>ARE YOU READY</h2>
       <h1>TO ROCK?</h1>
     </header>
+
+    <h4 class="press-button">Press the button to begin.</h4>
   </div>
 `;

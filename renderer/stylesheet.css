@@ -125,9 +125,9 @@ h1 {
   position: absolute;
   top: 65%;
   left: 50%;
-  max-width: 1050px;
-  max-height: 1400px;
+  max-width: 900px;
   width: 100%;
+  max-height: 1150px;
   height: 100%;
   transform: translate(-50%, -60%);
   object-fit: contain;
@@ -138,8 +138,8 @@ h1 {
   position: absolute;
   top: 65%;
   left: 50%;
-  max-width: 1050px;
-  max-height: 1400px;
+  max-width: 900px;
+  max-height: 1200px;
   width: 100%;
   height: 100%;
   transform: translate(-50%, -60%);
@@ -164,10 +164,10 @@ h1 {
 }
 
 .pose-res {
-  width: 470px;
-  margin-left: -65px;
+  width: 420px;
+  margin-left: -90px;
   float: left;
-  transform: rotate(90deg);
+  transform: rotate(-90deg);
 }
 
 .pose-res-1 {
@@ -200,8 +200,8 @@ h1 {
 
 .webcamVideo {
   /* is the width, because its rotated */
-  height: 1050px;
-  transform: rotate(-90deg) translateX(-1440px) translateY(115px);
+  height: 900px;
+  transform: rotate(-90deg) translateX(-1350px) translateY(75px);
   transform-origin: top left;
   object-fit: cover;
   position: absolute;
@@ -216,4 +216,16 @@ h1 {
   font-size: 100px;
   margin: 0;
   z-index: 1000;
+}
+
+.press-button {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50px;
+  text-align: center;
+  font-size: 70px;
+  font-weight: bold;
+  font-family: 'proxima_nova_bold';
+  color: white;
 }
