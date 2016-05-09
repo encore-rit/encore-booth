@@ -134,7 +134,7 @@ h1 {
 }
 
 .pose-img-overlay {
-  opacity: 0.4;
+  opacity: 0.2;
   position: absolute;
   top: 65%;
   left: 50%;
@@ -165,7 +165,7 @@ h1 {
 
 .pose-res {
   width: 420px;
-  margin-left: -90px;
+  margin-left: -105px;
   float: left;
   transform: rotate(-90deg);
 }
